@@ -3,6 +3,7 @@ import React from 'react';
 import {
   View,
   SafeAreaView,
+  ScrollView,
   Text,
   Image,
   Dimensions
@@ -21,15 +22,16 @@ const App = () => {
 
   return (
     <SafeAreaView>
-      {fotos.map(foto =>
-        <View key={foto.id}>
-          <Text>{foto.usuario}</Text>
-          <Image
-            source={require('./resources/img/alura.jpg')}
-            style={{ width: screenWidth, height: screenWidth }} />
-        </View>
-      )}
-
+      <ScrollView>
+        {fotos.map(foto =>
+          <View key={foto.id}>
+            <Text>{foto.usuario}</Text>
+            <Image
+              source={require('./resources/img/alura.jpg')}
+              style={{ width: screenWidth, height: screenWidth }} />
+          </View>
+        )}
+      </ScrollView>
     </SafeAreaView>
   );
 };
