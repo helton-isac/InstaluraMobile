@@ -3,7 +3,7 @@ import React from 'react';
 import {
   View,
   SafeAreaView,
-  ScrollView,
+  FlatList,
   Text,
   Image,
   Dimensions
@@ -22,16 +22,18 @@ const App = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
-        {fotos.map(foto =>
-          <View key={foto.id}>
-            <Text>{foto.usuario}</Text>
+      <FlatList
+        keyExtractor={item => item.id.toString()}
+        data={fotos}
+        renderItem={({ item }) =>
+          <View>
+            <Text>{item.usuario}</Text>
             <Image
               source={require('./resources/img/alura.jpg')}
               style={{ width: screenWidth, height: screenWidth }} />
           </View>
-        )}
-      </ScrollView>
+        }
+      />
     </SafeAreaView>
   );
 };
