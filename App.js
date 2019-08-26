@@ -6,7 +6,8 @@ import {
   FlatList,
   Text,
   Image,
-  Dimensions
+  Dimensions,
+  StyleSheet
 } from 'react-native';
 
 const screenWidth = Dimensions.get('screen').width;
@@ -27,15 +28,38 @@ const App = () => {
         data={fotos}
         renderItem={({ item }) =>
           <View>
-            <Text>{item.usuario}</Text>
+            <View style={styles.cabecalho}>
+              <Image
+                source={require('./resources/img/alura.jpg')}
+                style={styles.fotoDePerfil} />
+              <Text>{item.usuario}</Text>
+            </View>
             <Image
               source={require('./resources/img/alura.jpg')}
-              style={{ width: screenWidth, height: screenWidth }} />
+              style={styles.foto} />
           </View>
         }
       />
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  cabecalho: {
+    margin: 10,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  fotoDePerfil: {
+    marginRight: 10,
+    borderRadius: 20,
+    width: 40,
+    height: 40
+  },
+  foto: {
+    width: screenWidth,
+    height: screenWidth
+  }
+});
 
 export default App;
