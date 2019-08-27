@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import {
     View,
@@ -10,18 +10,18 @@ import {
 
 const screenWidth = Dimensions.get('screen').width;
 
-export default class Post extends React.Component {
+export default class Post extends Component {
     render() {
         return (
             <View>
                 <View style={styles.cabecalho}>
                     <Image
-                        source={require('../../resources/img/alura.jpg')}
+                        source={{ uri: this.props.foto.urlPerfil }}
                         style={styles.fotoDePerfil} />
-                    <Text>{this.props.foto.usuario}</Text>
+                    <Text>{this.props.foto.loginUsuario}</Text>
                 </View>
                 <Image
-                    source={require('../../resources/img/alura.jpg')}
+                    source={{ uri: this.props.foto.urlFoto }}
                     style={styles.foto} />
             </View>
         );

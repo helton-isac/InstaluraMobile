@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import {
   SafeAreaView,
@@ -7,25 +7,32 @@ import {
 
 import Post from './src/components/Post';
 
-const App = () => {
+export default class App extends Component {
 
-  const fotos = [
-    { id: 1, usuario: 'rafael' },
-    { id: 2, usuario: 'alberto' },
-    { id: 3, usuario: 'vitor' }
-  ];
+  constructor() {
+    super();
+    this.state = {
+      fotos: []
+    };
+  }
 
-  return (
-    <SafeAreaView>
-      <FlatList
-        keyExtractor={item => item.id.toString()}
-        data={fotos}
-        renderItem={({ item }) =>
-          <Post foto={item} />
-        }
-      />
-    </SafeAreaView>
-  );
-};
+  componentDidMount() {
+    fetch('https://instalura-api.herokuapp.com/api/public/fotos/rafael')
+      .then(response => response.json())
+      .then(json => this.setState({ fotos: json }))
+  }
 
-export default App;
+  render() {
+    return (
+      <SafeAreaView>
+        <FlatList
+          keyExtractor={item => item.id.toString()}
+          data={this.state.fotos}
+          renderItem={({ item }) =>
+            <Post foto={item} />
+          }
+        />
+      </SafeAreaView>
+    );
+  };
+}
