@@ -20,6 +20,10 @@ export default class App extends Component {
     fetch('https://instalura-api.herokuapp.com/api/public/fotos/rafael')
       .then(response => response.json())
       .then(json => this.setState({ fotos: json }))
+      .catch(e => {
+        console.warn('Não foi possível carregar as fotos: ' + e);
+        this.setState({status: 'ERRO'})
+      });
   }
 
   render() {
