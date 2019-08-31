@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 
 import Post from './src/components/Post';
+import sampleData from './SampleData.json';
 
 export default class App extends Component {
 
@@ -17,13 +18,18 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    fetch('https://instalura-api.herokuapp.com/api/public/fotos/rafael')
-      .then(response => response.json())
-      .then(json => this.setState({ fotos: json }))
-      .catch(e => {
-        console.warn('Não foi possível carregar as fotos: ' + e);
-        this.setState({status: 'ERRO'})
-      });
+    const useSample = true;
+    if (!useSample) {
+      fetch('https://instalura-api.herokuapp.com/api/public/fotos/rafael')
+        .then(response => response.json())
+        .then(json => this.setState({ fotos: json }))
+        .catch(e => {
+          console.warn('Não foi possível carregar as fotos: ' + e);
+          this.setState({ status: 'ERRO' })
+        });
+    } else {
+      this.setState({ fotos: sampleData });
+    }
   }
 
   render() {
